@@ -1,62 +1,93 @@
 # Python Basics
 
 ---
-- [Data Types](#datatypes)
+
+## Table of Contents
+- [Data Types](#data-types)
 - [Syntax](#syntax)
 - [Functions](#functions)
+
 ---
 
 ## Data Types
 
 ### Numeric 
-- **Integer (`int`)** → whole numbers, no decimals.
+
+- **Integer (`int`)** → Represents whole numbers without a fractional part.
+Used in counting, indexing, loop counters, etc.
 ```python
-age = 20
+age = 30
+year = 2024
+score = -5
 ```
 
-- **Floating Point (`float`)** → numbers with decimal values.
+- **Floating Point (`float`)** → Represents numbers with decimal points.
+Used for measurements, percentages, financial data, etc.
 ```python 
-height = 182.5
+height = 1.82
+price = 99.99
+temperature = -4.5
 ```
 
-- **Complex (`complex`)** → complex numbers with a real and imaginary part.
+- **Complex (`complex`)** → Numbers with real and imaginary parts.
+Useful in scientific and engineering calculations.
 ```python
-k = 1j
 z = 3 + 5j
-#j is the imaginary denotation
+print(z.real)   # 3.0
+print(z.imag)   # 5.0
 ```
 
-
+---
 
 ### Text 
-- **String (`str`)** → a sequence of characters.
+
+- **String (`str`)** → A sequence of characters used to store text.
+Used for messages, names, descriptions, etc.
 ```python 
 name = "Hubert"
+greeting = "Hello, " + name
+print(greeting)  # Hello, Hubert
 ```
+
+You can also use:
+```python
+multiline = """This is
+a multiline
+string."""
+```
+
+---
 
 ### Boolean 
-- **Boolean (`bool`)** → represents True or False
+
+- **Boolean (`bool`)** → Logical values representing truth.
+Used in conditions, comparisons, control flow.
 ```python 
-alive = True
-married = False
+is_alive = True
+is_admin = False
+print(5 > 2)  # True
+print(3 == 4)  # False
 ```
+
+---
 
 ### Sequences
-- **List (`list`)** → ordered and mutable collection of indexable values that allows duplicates:
+
+- **List (`list`)** → Ordered, mutable and indexable collection of items that allows duplicates.
+Used when you need an editable sequence of values.
 ```python
-empty = []
-spells = ["Fireball", "Frostbolt", "Arcane Missiles"]
-stuff = stuff = [42, "Mage", True, 3.14] # can have multiple types
+items = ["sword", "shield", "potion"]
+items.append("bow")
+items[0] = "magic sword"
 ```
 
-- **Tuple (`tuple`)** → ordered and unmutable collection of indexable values that allows duplicates:
+- **Tuple (`tuple`)** → Ordered, immutable and indexable collection of items that allows duplicates.
+Used for fixed collections, such as coordinates or RGB values.
 ```python
-empty = ()
-one = (42,)           # must include the comma!
-pair = (1, 2)
-triple = (1, 2, 3)
-lots = ("a", "b", "c", 1, 2, True) # can have multiple types
+position = (100, 200)
+rgb = (255, 100, 75)
 ```
+
 - **Range (`range`)** → a built-in Python type used to generate sequences of numbers, especially useful for loops.
 ```python
 range(start, stop, step) 
@@ -83,72 +114,115 @@ for i in range(5):
 # 3
 # 4
 ```
+
+---
+
 ### Mapping
-- **Dictionary (`dict`)** → key-value pairs, unordered and mutable.
+
+- **Dictionary (`dict`)** → Unordered, mutable and unindexable collection of key-value pairs.
+Used for fast lookups, configs, JSON-like structures.
 ```python
-character = {"name": "Pyroblastio", "class": "Mage", "level": 60}
+user = {"charname": "Maguskin", "level": 60}
+user["class"] = "Mage"
+print(user["level"])
 ```
+
+---
 
 ### Set
-- **Set (`set`)** → unordered and mutable collection of unindexable values that does NOT allow duplicates.
+
+- **Set (`set`)** → Unordered, mutable and unindexable collection of unique elements.
+Used to remove duplicates, fast membership testing, math set operations.
 ```python
-buffs = {"Arcane Intellect", "Stamina", "Arcane Intellect"}
+buffs = {"Stamina", "Arcane Intellect"}
+buffs.add("Spirit")
+print("Spirit" in buffs)
 ```
 
-- **Frozen Set (`frozenset`)** → exactly like a set, but immutable.
+- **Frozen Set (`frozenset`)** → Like a set, but immutable.
+Used when you need a constant collection for hashing or as a dictionary key.
 ```python
 elements = frozenset(["fire", "water", "air"])
 ```
 
+---
+
 ### Binary
 
-- **Bytes(`bytes`)** →
+- **Bytes (`bytes`)** → Immutable sequence of raw bytes (0–255).
+Used for binary files, network protocols, low-level data.
+```python
+data = b"hello"
+print(data[0])  # 104
+```
 
-- **Byte Array(`bytearray)** →
+- **Byte Array (`bytearray`)** → Mutable version of `bytes`.
+Used when you need to edit binary data.
+```python
+buffer = bytearray(b"hello")
+buffer[0] = 72
+print(buffer)  # bytearray(b'Hello')
+```
 
-- **Memory View (`memoryview`)** →
+- **Memory View (`memoryview`)** → Efficient view over binary data, no copy.
+Used for working with large data buffers.
+```python
+mv = memoryview(b"world")
+print(mv[1])  # 111 (ASCII for 'o')
+```
 
+---
 
-## None/Null
+### None / Null
 
-- **None Type (`NoneType`)** →
+- **None Type (`NoneType`)** → Represents the absence of a value.
+Common in default arguments, null checks, and uninitialized variables.
+```python
+result = None
 
-
-
-
-
+if result is None:
+    print("No result yet.")
+```
 
 ---
 
 ## Syntax
-- `#` is used to comment a single line in Python.
-For multi-line comments, you usually just use multiple single-line comments:
 
+- **Comments** → Used to describe code or temporarily disable lines.
+`#` is used to comment a single line in Python.
+```python
+# Explaining what the following line does:
+x = 5
+```
+For multi-line comments, you usually just use multiple single-line comments:
 ```python
 # Line 1
 # Line 2
 # Line 3
 ```
-- By convention, Python follows snake case.
-```python 
-a_variable_name = "name"
-```
-- Variables are case sensitive.
+
+- **Snake Case** → Naming convention using underscores.
 ```python
-a = 3
-A = False
-#A will not overwrite a, they are two different variables
+user_name = "User's name"
 ```
-- Python allows you to assign values to multiple variables in one line:
+
+- **Case Sensitivity** → Python differentiates variable names by case.
+```python
+a = 10
+A = 20
+# A will not overwrite a, they are two different variables
+```
+
+- **Multiple Assignment** → Python allows you to assign values to multiple variables in one line.
 ```python
 x, y, z = "Orange", "Banana", "Cherry"
 ```
-- And you can assign the same value to multiple variables in one line:
+And you can assign the same value to multiple variables in one line:
 ```python
-x = y = z = "Orange"
+a = b = c = "Orange"
 ```
 
-- Variables that are created outside of a function are known as global variables. They can be used by everyone, both inside of functions and outside.
+- **Global vs Local Variables** → Variables that are created outside of a function are known as global variables. They can be used by everyone, both inside of functions and outside.
 ```python
 x = "awesome"
 
@@ -171,7 +245,7 @@ myfunc()
 print("Python is " + x)
 ```
 
-- Normally, when you create a variable inside a function, that variable is local, and can only be used inside that function. To create a global variable inside a function, you can use the global keyword:
+- **Global Keyword (`global`)** → Normally, when you create a variable inside a function, that variable is local, and can only be used inside that function. To create a global variable inside a function, you can use the global keyword:
 ```python
 def myfunc():
   global x
@@ -195,34 +269,99 @@ myfunc()
 print("Python is " + x)
 ```
 
-- If you have a collection of values in a list, tuple etc. Python allows you to extract the values into variables. This is called unpacking.
+## Unpacking
+
+Unpacking allows you to assign elements from a collection (like a list or tuple) directly into individual variables in a single line.
+It makes code cleaner and easier to read and is useful when you know the exact number of elements.
+
 ```python
 fruits = ["apple", "banana", "cherry"]
 x, y, z = fruits
+
+print(x)  # apple
+print(y)  # banana
+print(z)  # cherry
+```
+
+You can also use `*` to unpack the remaining values:
+
+```python
+numbers = [1, 2, 3, 4, 5]
+a, b, *rest = numbers
+print(a, b)     # 1 2
+print(rest)     # [3, 4, 5]
 ```
 
 ---
 
+## Functions
 
-#### Functions
-- **`print()`** → can be used to display output on the terminal/console.
+Functions are reusable blocks of code that perform specific tasks.
+
+The `print()` function displays output to the terminal or console.
+
 ```python
-print("Hello World!")
-```
-In the print() function, you can output multiple variables, separated by a comma:
-```python
-x = "Python"
-y = "is"
-z = "awesome"
-print(x, y, z)
+print("Welcome to Python!")
 ```
 
-- **`type()`** → used to determine the type of something.
+Print multiple values:
 ```python
-x = 5
-print(type(x))
+name = "Hubert"
+print("Hello", name, "!")  # Hello Hubert !
 ```
 
+---
 
+Use `type()` to check the data type of any value.
 
+```python
+print(type(42))       # <class 'int'>
+print(type("Hello"))  # <class 'str'>
+print(type([1, 2, 3]))  # <class 'list'>
+```
 
+---
+
+### Custom Functions
+
+You can define your own functions using the `def` keyword.
+
+```python
+def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("Hubert"))  # Hello, Hubert!
+```
+
+- `name` is a parameter (input to the function)
+- `return` gives back a result
+
+---
+
+#### Functions with Default Arguments
+
+Default arguments provide fallback values when no input is given.
+
+```python
+def say_hello(name="friend"):
+    print(f"Hello, {name}!")
+
+say_hello()           # Hello, friend!
+say_hello("Hubert")   # Hello, Hubert!
+```
+
+---
+
+### Returning Values
+
+Functions can return data using the `return` keyword.
+
+```python
+def square(x):
+    return x * x
+
+result = square(5)
+print(result)  # 25
+```
+
+You can return any type: numbers, strings, lists, etc.
