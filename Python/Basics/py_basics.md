@@ -1,7 +1,7 @@
 # Python Basics
 
 ---
-- [Primitives](#primitives)
+- [Data Types](#datatypes)
 - [Syntax](#syntax)
 - [Functions](#functions)
 ---
@@ -21,6 +21,7 @@ height = 182.5
 
 - **Complex (`complex`)** → complex numbers with a real and imaginary part.
 ```python
+k = 1j
 z = 3 + 5j
 #j is the imaginary denotation
 ```
@@ -41,14 +42,14 @@ married = False
 ```
 
 ### Sequences
-- **List** → ordered, mutable, allows duplicates:
+- **List (`list`)** → ordered and mutable collection of indexable values that allows duplicates:
 ```python
 empty = []
 spells = ["Fireball", "Frostbolt", "Arcane Missiles"]
 stuff = stuff = [42, "Mage", True, 3.14] # can have multiple types
 ```
 
-- **Tuples** → ordered, unmutable, allows duplicates:
+- **Tuple (`tuple`)** → ordered and unmutable collection of indexable values that allows duplicates:
 ```python
 empty = ()
 one = (42,)           # must include the comma!
@@ -56,7 +57,7 @@ pair = (1, 2)
 triple = (1, 2, 3)
 lots = ("a", "b", "c", 1, 2, True) # can have multiple types
 ```
-- **Range** → a built-in Python type used to generate sequences of numbers, especially useful for loops.
+- **Range (`range`)** → a built-in Python type used to generate sequences of numbers, especially useful for loops.
 ```python
 range(start, stop, step) 
 # start (optional): where the sequence begins (default is 0)
@@ -87,6 +88,36 @@ for i in range(5):
 ```python
 character = {"name": "Pyroblastio", "class": "Mage", "level": 60}
 ```
+
+### Set
+- **Set (`set`)** → unordered and mutable collection of unindexable values that does NOT allow duplicates.
+```python
+buffs = {"Arcane Intellect", "Stamina", "Arcane Intellect"}
+```
+
+- **Frozen Set (`frozenset`)** → exactly like a set, but immutable.
+```python
+elements = frozenset(["fire", "water", "air"])
+```
+
+### Binary
+
+- **Bytes(`bytes`)** →
+
+- **Byte Array(`bytearray)** →
+
+- **Memory View (`memoryview`)** →
+
+
+## None/Null
+
+- **None Type (`NoneType`)** →
+
+
+
+
+
+
 ---
 
 ## Syntax
