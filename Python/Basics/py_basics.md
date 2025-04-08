@@ -208,9 +208,9 @@ user_name = "User's name"
 
 - **Case Sensitivity** → Python differentiates variable names by case.
 ```python
-a = 10
-A = 20
-# A will not overwrite a, they are two different variables
+var = 10
+vAr = 20
+# vAr will not overwrite var, they are two different variables
 ```
 
 - **Multiple Assignment** → Python allows you to assign values to multiple variables in one line.
