@@ -1,17 +1,23 @@
 import json
 import os
+import sys
 
 # Defining main functions
 
 def setup_file_paths():
-    BASE_DIR = os.path.dirname(os.path.abspath(
-    __file__))  # folder where the app is
-    DATA_DIR = os.path.join(BASE_DIR, "data")  # folder where the data directory is
-    # folder where 'expenses.json' is
-    FILE_PATH = os.path.join(DATA_DIR, "expenses.json")
+    # folder where the app is
+    if getattr(sys, 'frozen', False):
+        # Running as a bundled exe
+        base_dir = os.path.dirname(sys.executable)
+    else:
+        # Running as a script
+        base_dir = os.path.dirname(os.path.abspath(__file__)) 
+        
+    data_dir = os.path.join(base_dir, "data") # folder where the data directory is
+    file_path = os.path.join(data_dir, "expenses.json")  # folder where 'expenses.json' is
     # create a 'data' directory if there isn't one yet
-    os.makedirs(DATA_DIR, exist_ok=True)
-    return FILE_PATH
+    os.makedirs(data_dir, exist_ok=True)
+    return file_path
 
 def load_expenses(FILE_PATH):
     if os.path.exists(FILE_PATH):
@@ -36,11 +42,15 @@ def add_expenses(expenses, FILE_PATH):
     save_expenses(expenses, FILE_PATH)
     
 def view_expenses(expenses):
-    for expense in (expenses):
+    total = 0
+    for expense in expenses:
         e_name = expense["Expense"]
         e_cost = expense["Cost"]
-        print(f"You bought {e_name} for {e_cost}$\n")
-        
+        total += e_cost
+        print(f"You bought {e_name} for ${e_cost:.2f}")
+    
+    print(f"\nTotal spent: ${total:.2f}")
+
         
 # main variables
 FILE_PATH = setup_file_paths()  
@@ -49,7 +59,7 @@ expenses = load_expenses(FILE_PATH)
 # Main CLI Menu
 while True:
     print("Options: 1 - Add Expense; 2 - Remove Expense; 3 - Edit Expense; 4 - View Expenses; 5 - Quit")
-    user_cmd = input("\n")
+    user_cmd = input()
     
     if user_cmd in ["5", "quit"]:
         break
