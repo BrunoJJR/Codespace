@@ -28,12 +28,19 @@ def save_expenses(expenses, FILE_PATH):
         json.dump(expenses, file, indent=2)
         
 def add_expenses(expenses, FILE_PATH):
-    n = int(input("How many expenses do you want to add?\n"))
+    n = int(input("\nHow many expenses do you want to add?\n"))
     for i in range(n):
         expense_name = input("Enter the expense: ")
         expense_cost = float(input("Enter the cost of the expense: "))
         expenses.append({"Expense": expense_name, "Cost": expense_cost})
     save_expenses(expenses, FILE_PATH)
+    
+def view_expenses(expenses):
+    for expense in (expenses):
+        e_name = expense["Expense"]
+        e_cost = expense["Cost"]
+        print(f"You bought {e_name} for {e_cost}$\n")
+        
         
 # main variables
 FILE_PATH = setup_file_paths()  
@@ -42,23 +49,21 @@ expenses = load_expenses(FILE_PATH)
 # Main CLI Menu
 while True:
     print("Options: 1 - Add Expense; 2 - Remove Expense; 3 - Edit Expense; 4 - View Expenses; 5 - Quit")
-    user_cmd = input()
+    user_cmd = input("\n")
     
     if user_cmd in ["5", "quit"]:
         break
     
     elif user_cmd in ["1", "add"]:
         add_expenses(expenses, FILE_PATH)
-        
     elif user_cmd in ["2", "rmv"]:
         #rmv_expense()
-        print("Not Implemented Yet")
+        print("Not Implemented Yet\n")
     elif user_cmd in ["3", "edit"]:
         #edit_expense()
-        print("Not Implemented Yet")
+        print("Not Implemented Yet\n")
     elif user_cmd in ["4", "view"]:
-        #view_expense()
-        print("Not Implemented Yet")
+        view_expenses(expenses)
         
     else:
         print("Not a supported functionality.\n")
