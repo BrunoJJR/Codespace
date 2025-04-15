@@ -46,21 +46,23 @@ def add_expenses(expenses, FILE_PATH):
 
 def rmv_expenses(expenses, FILE_PATH):
     print("Current expense list: \n")
-    view_expenses(expenses)
-    
-    n = int(input("\nHow many expenses do you want to remove?\n"))
-    
-    for i in range(n):
-        try:
-            e_id = int(input("Enter the ID number of the expense: "))
-            removed = expenses.pop(e_id - 1)
-            print(f"Removed: {removed['Expense']} - ${removed['Cost']:.2f}")
-        except (ValueError, IndexError):
-            print("Invalid ID — skipping.\n")
-            
-    save_expenses(expenses, FILE_PATH)
-
+    if not expenses:
+        print("Your expense list is EMPTY!")
+    else:
+        view_expenses(expenses)
         
+        n = int(input("\nHow many expenses do you want to remove?\n"))
+        
+        for i in range(n):
+            try:
+                e_id = int(input("Enter the ID number of the expense: "))
+                removed = expenses.pop(e_id - 1)
+                print(f"Removed: {removed['Expense']} - ${removed['Cost']:.2f}")
+            except (ValueError, IndexError):
+                print("Invalid ID — skipping.\n")
+                
+        save_expenses(expenses, FILE_PATH)
+
         
 def view_expenses(expenses):
     if not expenses:
